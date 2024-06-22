@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body{
+            background-color: #4c9173;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            font-family: sans-serif;
+        }
+        .calculator{
+            width: 50;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #906387;
+        }
+        .calc-text{
+            width: 100px;
+            height: 30px;
+            margin-bottom: 10px;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        .calc-keys{
+            width: 30px;
+            height: 30px;
+            margin: 5px;
+            padding: 10px;
+            border-radius: 5px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 35px;
+            cursor: pointer;
+        }
+        input[type="button"]:hover {
+            background-color: #AF7AC5  ;
+        }
+        input[type="button"]:active {
+            background-color: #512E5F   ;
+        }
+    </style> 
+</head>
+<body>
+    <h1 class="header">CALCULATOR</h1>
+    <table class="calculator"> 
+        <tr> 
+            <td  class="calc-text" colspan="3"  > 
+                <input type="text" id="result" value=""> 
+            </td> 
+            <td class="calc-keys" ><input type="button" value="c"></td> 
+        </tr> 
+        <tr  class="calc-keys"> 
+            <td><input type="button" value="7"></td> 
+            <td><input type="button" value="8"></td> 
+            <td><input type="button" value="9"></td> 
+            <td><input type="button" value="/"></td> 
+        </tr> 
+        <tr class="calc-keys"> 
+            <td><input type="button" value="4"></td> 
+            <td><input type="button" value="5"></td> 
+            <td><input type="button" value="6"></td> 
+            <td><input type="button" value="-"></td> 
+        </tr> 
+        <tr class="calc-keys"> 
+            <td><input type="button" value="1"></td> 
+            <td><input type="button" value="2"></td> 
+            <td><input type="button" value="3"></td> 
+            <td><input type="button" value="*"></td> 
+        </tr> 
+        <tr class="calc-keys"> 
+            <td><input type="button" value="0"></td> 
+            <td><input type="button" value="."></td> 
+            <td><input type="button" value="="></td> 
+            <td><input type="button" value="+"></td> 
+        </tr> 
+    </table>
+    <script>
+        const resultInput = document.getElementById('result');
+        const buttons = document.querySelectorAll('input[type="button"]');
+
+        let currentInput = '';
+       
+        buttons.forEach(button => {
+        button.addEventListener('click', () => {
+        const buttonText = button.value;
+
+        if (buttonText === 'c') {
+            currentInput = '';
+            resultInput.value = '';
+        } 
+        else if (buttonText === '=') {
+            try {
+                const result = eval(currentInput);
+                currentInput = result.toString();
+                resultInput.value = currentInput;
+            } catch (error) {
+                currentInput = 'Error';
+                resultInput.value = currentInput;
+            }
+        } 
+        else {
+            currentInput += buttonText;
+            resultInput.value = currentInput;
+        }       
+        });
+    });
+    </script> 
+</body>
+</html>
